@@ -26,7 +26,7 @@ public class GrammarPortugolParser extends Parser {
 		T__52=53, T__53=54, T__54=55, T__55=56, T__56=57, T__57=58, T_INT_LIT=59, 
 		T_DEC_LIT=60, T_OCTAL_LIT=61, T_HEX_LIT=62, T_BIN_LIT=63, T_REAL_LIT=64, 
 		T_CARAC_LIT=65, T_STRING_LIT=66, SL_COMMENT=67, ML_COMMENT=68, T_IDENTIFICADOR=69, 
-		T_KW_VERDADEIRO=70, T_KW_FALSO=71;
+		T_KW_VERDADEIRO=70, T_KW_FALSO=71, WS=72;
 	public static final int
 		RULE_algoritmo = 0, RULE_declaracao_algoritmo = 1, RULE_var_decl_block = 2, 
 		RULE_var_decl = 3, RULE_tp_primitivo = 4, RULE_tp_matriz = 5, RULE_tp_prim_pl = 6, 
@@ -62,7 +62,7 @@ public class GrammarPortugolParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, "T_INT_LIT", 
 		"T_DEC_LIT", "T_OCTAL_LIT", "T_HEX_LIT", "T_BIN_LIT", "T_REAL_LIT", "T_CARAC_LIT", 
 		"T_STRING_LIT", "SL_COMMENT", "ML_COMMENT", "T_IDENTIFICADOR", "T_KW_VERDADEIRO", 
-		"T_KW_FALSO"
+		"T_KW_FALSO", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -1856,7 +1856,7 @@ public class GrammarPortugolParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3I\u0119\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3J\u0119\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+

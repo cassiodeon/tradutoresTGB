@@ -69,6 +69,7 @@ ML_COMMENT=68
 T_IDENTIFICADOR=69
 T_KW_VERDADEIRO=70
 T_KW_FALSO=71
+WS=72
 'algoritmo'=1
 ';'=2
 'variáveis'=3

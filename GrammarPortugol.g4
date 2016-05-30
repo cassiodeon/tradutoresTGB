@@ -176,3 +176,6 @@ T_KW_VERDADEIRO
 T_KW_FALSO
 	: 'falso'
 	;
+	
+WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
