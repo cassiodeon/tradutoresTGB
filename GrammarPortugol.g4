@@ -19,6 +19,7 @@ tp_primitivo
 	| 'literal'
 	| 'lógico'
 	;
+
 tp_matriz
 	: 'matriz' ('[' T_INT_LIT ']')+ 'de' tp_prim_pl
 	;
@@ -108,19 +109,31 @@ fparam
 	: T_IDENTIFICADOR ':' (tp_primitivo | tp_matriz)
 	;
 
+INTEIRO 	: 'inteiro';
+REAL 		: 'real';
+CARACTERE 	: 'caractere';
+LITERAL 	: 'literal';
+LOGICO 		: 'lógico';
+
+INTEIROS 	: 'inteiros';
+REAIS 		: 'reais';
+CARACTERES 	: 'caracteres';
+LITERAIS 	: 'literais';
+LOGICOS 	: 'lógicos';
+
 /*
 	Regras para identificar literais numéricos
 */
 T_INT_LIT
-	: T_OCTAL_LIT 
-	| T_HEX_LIT 
-	| T_BIN_LIT 
+	: T_OCTAL_LIT
+	| T_HEX_LIT
+	| T_BIN_LIT
 	| T_DEC_LIT
 	;
 T_DEC_LIT
 	: [0-9]+
 	;
-T_OCTAL_LIT	
+T_OCTAL_LIT
 	: '0' ('c'|'C') [0-8]+
 	;
 T_HEX_LIT
@@ -135,7 +148,7 @@ T_REAL_LIT
 
 /*
 	Regras para idenfiticar caracteres e cadeias de caracteres
-T_CARAC_LIT	
+T_CARAC_LIT
 	: ''' ((''' | '\') | '\' . )? '''
 	;
 
@@ -145,7 +158,7 @@ T_CARAC_LIT
 
 */
 
-T_CARAC_LIT	
+T_CARAC_LIT
 	: '\'' ( . )? '\''
 	;
 T_STRING_LIT
@@ -156,10 +169,10 @@ T_STRING_LIT
 	Regras para identificar comentário
 */
 
-SL_COMMENT	
+SL_COMMENT
 	: '//' [^LF]* ('\n')?
 	;
-ML_COMMENT	
+ML_COMMENT
 	: '/*' ( ('*') | '*' '/')* '*/'
 	;
 
@@ -167,7 +180,7 @@ ML_COMMENT
 	Regra para identificar nomes de variáveis, funções, etc.
 */
 
-T_IDENTIFICADOR	
+T_IDENTIFICADOR
 	: [a-zA-Z_] [a-zA-Z0-9_]*
 	;
 T_KW_VERDADEIRO
@@ -176,6 +189,6 @@ T_KW_VERDADEIRO
 T_KW_FALSO
 	: 'falso'
 	;
-	
+
 WS  :  [ \t\r\n\u000C]+ -> skip
     ;

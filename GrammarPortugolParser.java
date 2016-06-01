@@ -22,11 +22,11 @@ public class GrammarPortugolParser extends Parser {
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
 		T__38=39, T__39=40, T__40=41, T__41=42, T__42=43, T__43=44, T__44=45, 
-		T__45=46, T__46=47, T__47=48, T__48=49, T__49=50, T__50=51, T__51=52, 
-		T__52=53, T__53=54, T__54=55, T__55=56, T__56=57, T__57=58, T_INT_LIT=59, 
-		T_DEC_LIT=60, T_OCTAL_LIT=61, T_HEX_LIT=62, T_BIN_LIT=63, T_REAL_LIT=64, 
-		T_CARAC_LIT=65, T_STRING_LIT=66, SL_COMMENT=67, ML_COMMENT=68, T_IDENTIFICADOR=69, 
-		T_KW_VERDADEIRO=70, T_KW_FALSO=71, WS=72;
+		T__45=46, T__46=47, T__47=48, INTEIRO=49, REAL=50, CARACTERE=51, LITERAL=52, 
+		LOGICO=53, INTEIROS=54, REAIS=55, CARACTERES=56, LITERAIS=57, LOGICOS=58, 
+		T_INT_LIT=59, T_DEC_LIT=60, T_OCTAL_LIT=61, T_HEX_LIT=62, T_BIN_LIT=63, 
+		T_REAL_LIT=64, T_CARAC_LIT=65, T_STRING_LIT=66, SL_COMMENT=67, ML_COMMENT=68, 
+		T_IDENTIFICADOR=69, T_KW_VERDADEIRO=70, T_KW_FALSO=71, WS=72;
 	public static final int
 		RULE_algoritmo = 0, RULE_declaracao_algoritmo = 1, RULE_var_decl_block = 2, 
 		RULE_var_decl = 3, RULE_tp_primitivo = 4, RULE_tp_matriz = 5, RULE_tp_prim_pl = 6, 
@@ -44,13 +44,13 @@ public class GrammarPortugolParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'algoritmo'", "';'", "'variáveis'", "'fim-variáveis'", "','", 
-		"':'", "'inteiro'", "'real'", "'caractere'", "'literal'", "'lógico'", 
-		"'matriz'", "'['", "']'", "'de'", "'inteiros'", "'reais'", "'caracteres'", 
-		"'literais'", "'lógicos'", "'início'", "'fim'", "'retorne'", "':='", 
-		"'se'", "'então'", "'senão'", "'fim-se'", "'enquanto'", "'faça'", "'fim-enquanto'", 
-		"'para'", "'até'", "'fim-para'", "'passo'", "'+'", "'-'", "'ou'", "'||'", 
-		"'e'", "'&&'", "'|'", "'^'", "'&'", "'='", "'<>'", "'>'", "'>='", "'<'", 
-		"'<='", "'/'", "'*'", "'%'", "'~'", "'não'", "'('", "')'", "'função'", 
+		"':'", "'matriz'", "'['", "']'", "'de'", "'início'", "'fim'", "'retorne'", 
+		"':='", "'se'", "'então'", "'senão'", "'fim-se'", "'enquanto'", "'faça'", 
+		"'fim-enquanto'", "'para'", "'até'", "'fim-para'", "'passo'", "'+'", 
+		"'-'", "'ou'", "'||'", "'e'", "'&&'", "'|'", "'^'", "'&'", "'='", "'<>'", 
+		"'>'", "'>='", "'<'", "'<='", "'/'", "'*'", "'%'", "'~'", "'não'", "'('", 
+		"')'", "'função'", "'inteiro'", "'real'", "'caractere'", "'literal'", 
+		"'lógico'", "'inteiros'", "'reais'", "'caracteres'", "'literais'", "'lógicos'", 
 		null, null, null, null, null, null, null, null, null, null, null, "'verdadeiro'", 
 		"'falso'"
 	};
@@ -59,8 +59,9 @@ public class GrammarPortugolParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, "T_INT_LIT", 
-		"T_DEC_LIT", "T_OCTAL_LIT", "T_HEX_LIT", "T_BIN_LIT", "T_REAL_LIT", "T_CARAC_LIT", 
+		null, "INTEIRO", "REAL", "CARACTERE", "LITERAL", "LOGICO", "INTEIROS", 
+		"REAIS", "CARACTERES", "LITERAIS", "LOGICOS", "T_INT_LIT", "T_DEC_LIT", 
+		"T_OCTAL_LIT", "T_HEX_LIT", "T_BIN_LIT", "T_REAL_LIT", "T_CARAC_LIT", 
 		"T_STRING_LIT", "SL_COMMENT", "ML_COMMENT", "T_IDENTIFICADOR", "T_KW_VERDADEIRO", 
 		"T_KW_FALSO", "WS"
 	};
@@ -167,7 +168,7 @@ public class GrammarPortugolParser extends Parser {
 			setState(58);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__57) {
+			while (_la==T__47) {
 				{
 				{
 				setState(55);
@@ -349,17 +350,17 @@ public class GrammarPortugolParser extends Parser {
 			match(T__5);
 			setState(88);
 			switch (_input.LA(1)) {
-			case T__6:
-			case T__7:
-			case T__8:
-			case T__9:
-			case T__10:
+			case INTEIRO:
+			case REAL:
+			case CARACTERE:
+			case LITERAL:
+			case LOGICO:
 				{
 				setState(86);
 				tp_primitivo();
 				}
 				break;
-			case T__11:
+			case T__6:
 				{
 				setState(87);
 				tp_matriz();
@@ -405,7 +406,7 @@ public class GrammarPortugolParser extends Parser {
 			{
 			setState(90);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTEIRO) | (1L << REAL) | (1L << CARACTERE) | (1L << LITERAL) | (1L << LOGICO))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -453,7 +454,7 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(92);
-			match(T__11);
+			match(T__6);
 			setState(96); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -461,19 +462,19 @@ public class GrammarPortugolParser extends Parser {
 				{
 				{
 				setState(93);
-				match(T__12);
+				match(T__7);
 				setState(94);
 				match(T_INT_LIT);
 				setState(95);
-				match(T__13);
+				match(T__8);
 				}
 				}
 				setState(98); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__12 );
+			} while ( _la==T__7 );
 			setState(100);
-			match(T__14);
+			match(T__9);
 			setState(101);
 			tp_prim_pl();
 			}
@@ -513,7 +514,7 @@ public class GrammarPortugolParser extends Parser {
 			{
 			setState(103);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTEIROS) | (1L << REAIS) | (1L << CARACTERES) | (1L << LITERAIS) | (1L << LOGICOS))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -560,11 +561,11 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(105);
-			match(T__20);
+			match(T__10);
 			setState(109);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 23)) & ~0x3f) == 0 && ((1L << (_la - 23)) & ((1L << (T__22 - 23)) | (1L << (T__24 - 23)) | (1L << (T__28 - 23)) | (1L << (T__31 - 23)) | (1L << (T_IDENTIFICADOR - 23)))) != 0)) {
+			while (((((_la - 13)) & ~0x3f) == 0 && ((1L << (_la - 13)) & ((1L << (T__12 - 13)) | (1L << (T__14 - 13)) | (1L << (T__18 - 13)) | (1L << (T__21 - 13)) | (1L << (T_IDENTIFICADOR - 13)))) != 0)) {
 				{
 				{
 				setState(106);
@@ -576,7 +577,7 @@ public class GrammarPortugolParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(112);
-			match(T__21);
+			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -713,10 +714,10 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(124);
-			match(T__22);
+			match(T__12);
 			setState(126);
 			_la = _input.LA(1);
-			if (((((_la - 36)) & ~0x3f) == 0 && ((1L << (_la - 36)) & ((1L << (T__35 - 36)) | (1L << (T__36 - 36)) | (1L << (T__53 - 36)) | (1L << (T__54 - 36)) | (1L << (T__55 - 36)) | (1L << (T_INT_LIT - 36)) | (1L << (T_REAL_LIT - 36)) | (1L << (T_CARAC_LIT - 36)) | (1L << (T_STRING_LIT - 36)) | (1L << (T_IDENTIFICADOR - 36)) | (1L << (T_KW_VERDADEIRO - 36)) | (1L << (T_KW_FALSO - 36)))) != 0)) {
+			if (((((_la - 26)) & ~0x3f) == 0 && ((1L << (_la - 26)) & ((1L << (T__25 - 26)) | (1L << (T__26 - 26)) | (1L << (T__43 - 26)) | (1L << (T__44 - 26)) | (1L << (T__45 - 26)) | (1L << (T_INT_LIT - 26)) | (1L << (T_REAL_LIT - 26)) | (1L << (T_CARAC_LIT - 26)) | (1L << (T_STRING_LIT - 26)) | (1L << (T_IDENTIFICADOR - 26)) | (1L << (T_KW_VERDADEIRO - 26)) | (1L << (T_KW_FALSO - 26)))) != 0)) {
 				{
 				setState(125);
 				expr(0);
@@ -777,11 +778,11 @@ public class GrammarPortugolParser extends Parser {
 					{
 					{
 					setState(131);
-					match(T__12);
+					match(T__7);
 					setState(132);
 					expr(0);
 					setState(133);
-					match(T__13);
+					match(T__8);
 					}
 					} 
 				}
@@ -832,7 +833,7 @@ public class GrammarPortugolParser extends Parser {
 			setState(140);
 			lvalue();
 			setState(141);
-			match(T__23);
+			match(T__13);
 			setState(142);
 			expr(0);
 			setState(143);
@@ -882,26 +883,26 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(145);
-			match(T__24);
+			match(T__14);
 			setState(146);
 			expr(0);
 			setState(147);
-			match(T__25);
+			match(T__15);
 			setState(148);
 			stm_list();
 			setState(151);
 			_la = _input.LA(1);
-			if (_la==T__26) {
+			if (_la==T__16) {
 				{
 				setState(149);
-				match(T__26);
+				match(T__16);
 				setState(150);
 				stm_list();
 				}
 			}
 
 			setState(153);
-			match(T__27);
+			match(T__17);
 			}
 		}
 		catch (RecognitionException re) {
@@ -943,15 +944,15 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(155);
-			match(T__28);
+			match(T__18);
 			setState(156);
 			expr(0);
 			setState(157);
-			match(T__29);
+			match(T__19);
 			setState(158);
 			stm_list();
 			setState(159);
-			match(T__30);
+			match(T__20);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1003,20 +1004,20 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(161);
-			match(T__31);
+			match(T__21);
 			setState(162);
 			lvalue();
 			setState(163);
-			match(T__14);
+			match(T__9);
 			setState(164);
 			expr(0);
 			setState(165);
-			match(T__32);
+			match(T__22);
 			setState(166);
 			expr(0);
 			setState(168);
 			_la = _input.LA(1);
-			if (_la==T__34) {
+			if (_la==T__24) {
 				{
 				setState(167);
 				passo();
@@ -1024,11 +1025,11 @@ public class GrammarPortugolParser extends Parser {
 			}
 
 			setState(170);
-			match(T__29);
+			match(T__19);
 			setState(171);
 			stm_list();
 			setState(172);
-			match(T__33);
+			match(T__23);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1066,14 +1067,14 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(174);
-			match(T__34);
+			match(T__24);
 			setState(176);
 			_la = _input.LA(1);
-			if (_la==T__35 || _la==T__36) {
+			if (_la==T__25 || _la==T__26) {
 				{
 				setState(175);
 				_la = _input.LA(1);
-				if ( !(_la==T__35 || _la==T__36) ) {
+				if ( !(_la==T__25 || _la==T__26) ) {
 				_errHandler.recoverInline(this);
 				} else {
 					consume();
@@ -1139,11 +1140,11 @@ public class GrammarPortugolParser extends Parser {
 			{
 			setState(182);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__35) | (1L << T__36) | (1L << T__53) | (1L << T__54))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__43) | (1L << T__44))) != 0)) {
 				{
 				setState(181);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__35) | (1L << T__36) | (1L << T__53) | (1L << T__54))) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__43) | (1L << T__44))) != 0)) ) {
 				_errHandler.recoverInline(this);
 				} else {
 					consume();
@@ -1174,7 +1175,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
 						setState(187);
 						_la = _input.LA(1);
-						if ( !(_la==T__37 || _la==T__38) ) {
+						if ( !(_la==T__27 || _la==T__28) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1191,7 +1192,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						setState(190);
 						_la = _input.LA(1);
-						if ( !(_la==T__39 || _la==T__40) ) {
+						if ( !(_la==T__29 || _la==T__30) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1207,7 +1208,7 @@ public class GrammarPortugolParser extends Parser {
 						setState(192);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(193);
-						match(T__41);
+						match(T__31);
 						setState(194);
 						expr(9);
 						}
@@ -1219,7 +1220,7 @@ public class GrammarPortugolParser extends Parser {
 						setState(195);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(196);
-						match(T__42);
+						match(T__32);
 						setState(197);
 						expr(8);
 						}
@@ -1231,7 +1232,7 @@ public class GrammarPortugolParser extends Parser {
 						setState(198);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(199);
-						match(T__43);
+						match(T__33);
 						setState(200);
 						expr(7);
 						}
@@ -1244,7 +1245,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(202);
 						_la = _input.LA(1);
-						if ( !(_la==T__44 || _la==T__45) ) {
+						if ( !(_la==T__34 || _la==T__35) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1261,7 +1262,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(205);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1278,7 +1279,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(208);
 						_la = _input.LA(1);
-						if ( !(_la==T__35 || _la==T__36) ) {
+						if ( !(_la==T__25 || _la==T__26) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1295,7 +1296,7 @@ public class GrammarPortugolParser extends Parser {
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(211);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__50) | (1L << T__51) | (1L << T__52))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__40) | (1L << T__41) | (1L << T__42))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1383,7 +1384,7 @@ public class GrammarPortugolParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(221);
-				match(T__55);
+				match(T__45);
 				setState(222);
 				expr(0);
 				}
@@ -1430,10 +1431,10 @@ public class GrammarPortugolParser extends Parser {
 			setState(225);
 			match(T_IDENTIFICADOR);
 			setState(226);
-			match(T__55);
+			match(T__45);
 			setState(228);
 			_la = _input.LA(1);
-			if (((((_la - 36)) & ~0x3f) == 0 && ((1L << (_la - 36)) & ((1L << (T__35 - 36)) | (1L << (T__36 - 36)) | (1L << (T__53 - 36)) | (1L << (T__54 - 36)) | (1L << (T__55 - 36)) | (1L << (T_INT_LIT - 36)) | (1L << (T_REAL_LIT - 36)) | (1L << (T_CARAC_LIT - 36)) | (1L << (T_STRING_LIT - 36)) | (1L << (T_IDENTIFICADOR - 36)) | (1L << (T_KW_VERDADEIRO - 36)) | (1L << (T_KW_FALSO - 36)))) != 0)) {
+			if (((((_la - 26)) & ~0x3f) == 0 && ((1L << (_la - 26)) & ((1L << (T__25 - 26)) | (1L << (T__26 - 26)) | (1L << (T__43 - 26)) | (1L << (T__44 - 26)) | (1L << (T__45 - 26)) | (1L << (T_INT_LIT - 26)) | (1L << (T_REAL_LIT - 26)) | (1L << (T_CARAC_LIT - 26)) | (1L << (T_STRING_LIT - 26)) | (1L << (T_IDENTIFICADOR - 26)) | (1L << (T_KW_VERDADEIRO - 26)) | (1L << (T_KW_FALSO - 26)))) != 0)) {
 				{
 				setState(227);
 				fargs();
@@ -1441,7 +1442,7 @@ public class GrammarPortugolParser extends Parser {
 			}
 
 			setState(230);
-			match(T__56);
+			match(T__46);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1598,11 +1599,11 @@ public class GrammarPortugolParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(242);
-			match(T__57);
+			match(T__47);
 			setState(243);
 			match(T_IDENTIFICADOR);
 			setState(244);
-			match(T__55);
+			match(T__45);
 			setState(246);
 			_la = _input.LA(1);
 			if (_la==T_IDENTIFICADOR) {
@@ -1613,7 +1614,7 @@ public class GrammarPortugolParser extends Parser {
 			}
 
 			setState(248);
-			match(T__56);
+			match(T__46);
 			setState(251);
 			_la = _input.LA(1);
 			if (_la==T__5) {
@@ -1792,17 +1793,17 @@ public class GrammarPortugolParser extends Parser {
 			match(T__5);
 			setState(276);
 			switch (_input.LA(1)) {
-			case T__6:
-			case T__7:
-			case T__8:
-			case T__9:
-			case T__10:
+			case INTEIRO:
+			case REAL:
+			case CARACTERE:
+			case LITERAL:
+			case LOGICO:
 				{
 				setState(274);
 				tp_primitivo();
 				}
 				break;
-			case T__11:
+			case T__6:
 				{
 				setState(275);
 				tp_matriz();
@@ -1878,78 +1879,78 @@ public class GrammarPortugolParser extends Parser {
 		"\n\27\3\27\3\27\3\27\3\30\3\30\3\30\7\30\u0106\n\30\f\30\16\30\u0109\13"+
 		"\30\3\31\3\31\3\31\7\31\u010e\n\31\f\31\16\31\u0111\13\31\3\32\3\32\3"+
 		"\32\3\32\5\32\u0117\n\32\3\32\2\3\"\33\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(*,.\60\62\2\f\3\2\t\r\3\2\22\26\3\2&\'\4\2&\'89\3\2()\3\2"+
-		"*+\3\2/\60\3\2\61\64\3\2\65\67\5\2==BDHI\u0124\2\64\3\2\2\2\4A\3\2\2\2"+
-		"\6E\3\2\2\2\bO\3\2\2\2\n\\\3\2\2\2\f^\3\2\2\2\16i\3\2\2\2\20k\3\2\2\2"+
-		"\22|\3\2\2\2\24~\3\2\2\2\26\u0084\3\2\2\2\30\u008e\3\2\2\2\32\u0093\3"+
-		"\2\2\2\34\u009d\3\2\2\2\36\u00a3\3\2\2\2 \u00b0\3\2\2\2\"\u00b6\3\2\2"+
-		"\2$\u00e1\3\2\2\2&\u00e3\3\2\2\2(\u00ea\3\2\2\2*\u00f2\3\2\2\2,\u00f4"+
-		"\3\2\2\2.\u0107\3\2\2\2\60\u010a\3\2\2\2\62\u0112\3\2\2\2\64\66\5\4\3"+
-		"\2\65\67\5\6\4\2\66\65\3\2\2\2\66\67\3\2\2\2\678\3\2\2\28<\5\20\t\29;"+
-		"\5,\27\2:9\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2><\3\2\2\2?"+
-		"@\7\2\2\3@\3\3\2\2\2AB\7\3\2\2BC\7G\2\2CD\7\4\2\2D\5\3\2\2\2EI\7\5\2\2"+
-		"FG\5\b\5\2GH\7\4\2\2HJ\3\2\2\2IF\3\2\2\2JK\3\2\2\2KI\3\2\2\2KL\3\2\2\2"+
-		"LM\3\2\2\2MN\7\6\2\2N\7\3\2\2\2OT\7G\2\2PQ\7\7\2\2QS\7G\2\2RP\3\2\2\2"+
-		"SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2UW\3\2\2\2VT\3\2\2\2WZ\7\b\2\2X[\5\n\6\2"+
-		"Y[\5\f\7\2ZX\3\2\2\2ZY\3\2\2\2[\t\3\2\2\2\\]\t\2\2\2]\13\3\2\2\2^b\7\16"+
-		"\2\2_`\7\17\2\2`a\7=\2\2ac\7\20\2\2b_\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3"+
-		"\2\2\2ef\3\2\2\2fg\7\21\2\2gh\5\16\b\2h\r\3\2\2\2ij\t\3\2\2j\17\3\2\2"+
-		"\2ko\7\27\2\2ln\5\22\n\2ml\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2pr\3\2"+
-		"\2\2qo\3\2\2\2rs\7\30\2\2s\21\3\2\2\2t}\5\30\r\2uv\5&\24\2vw\7\4\2\2w"+
-		"}\3\2\2\2x}\5\24\13\2y}\5\32\16\2z}\5\34\17\2{}\5\36\20\2|t\3\2\2\2|u"+
-		"\3\2\2\2|x\3\2\2\2|y\3\2\2\2|z\3\2\2\2|{\3\2\2\2}\23\3\2\2\2~\u0080\7"+
-		"\31\2\2\177\u0081\5\"\22\2\u0080\177\3\2\2\2\u0080\u0081\3\2\2\2\u0081"+
-		"\u0082\3\2\2\2\u0082\u0083\7\4\2\2\u0083\25\3\2\2\2\u0084\u008b\7G\2\2"+
-		"\u0085\u0086\7\17\2\2\u0086\u0087\5\"\22\2\u0087\u0088\7\20\2\2\u0088"+
-		"\u008a\3\2\2\2\u0089\u0085\3\2\2\2\u008a\u008d\3\2\2\2\u008b\u0089\3\2"+
-		"\2\2\u008b\u008c\3\2\2\2\u008c\27\3\2\2\2\u008d\u008b\3\2\2\2\u008e\u008f"+
-		"\5\26\f\2\u008f\u0090\7\32\2\2\u0090\u0091\5\"\22\2\u0091\u0092\7\4\2"+
-		"\2\u0092\31\3\2\2\2\u0093\u0094\7\33\2\2\u0094\u0095\5\"\22\2\u0095\u0096"+
-		"\7\34\2\2\u0096\u0099\5\22\n\2\u0097\u0098\7\35\2\2\u0098\u009a\5\22\n"+
-		"\2\u0099\u0097\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009c"+
-		"\7\36\2\2\u009c\33\3\2\2\2\u009d\u009e\7\37\2\2\u009e\u009f\5\"\22\2\u009f"+
-		"\u00a0\7 \2\2\u00a0\u00a1\5\22\n\2\u00a1\u00a2\7!\2\2\u00a2\35\3\2\2\2"+
-		"\u00a3\u00a4\7\"\2\2\u00a4\u00a5\5\26\f\2\u00a5\u00a6\7\21\2\2\u00a6\u00a7"+
-		"\5\"\22\2\u00a7\u00a8\7#\2\2\u00a8\u00aa\5\"\22\2\u00a9\u00ab\5 \21\2"+
-		"\u00aa\u00a9\3\2\2\2\u00aa\u00ab\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac\u00ad"+
-		"\7 \2\2\u00ad\u00ae\5\22\n\2\u00ae\u00af\7$\2\2\u00af\37\3\2\2\2\u00b0"+
-		"\u00b2\7%\2\2\u00b1\u00b3\t\4\2\2\u00b2\u00b1\3\2\2\2\u00b2\u00b3\3\2"+
-		"\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b5\7=\2\2\u00b5!\3\2\2\2\u00b6\u00b8"+
-		"\b\22\1\2\u00b7\u00b9\t\5\2\2\u00b8\u00b7\3\2\2\2\u00b8\u00b9\3\2\2\2"+
-		"\u00b9\u00ba\3\2\2\2\u00ba\u00bb\5$\23\2\u00bb\u00d9\3\2\2\2\u00bc\u00bd"+
-		"\f\f\2\2\u00bd\u00be\t\6\2\2\u00be\u00d8\5\"\22\r\u00bf\u00c0\f\13\2\2"+
-		"\u00c0\u00c1\t\7\2\2\u00c1\u00d8\5\"\22\f\u00c2\u00c3\f\n\2\2\u00c3\u00c4"+
-		"\7,\2\2\u00c4\u00d8\5\"\22\13\u00c5\u00c6\f\t\2\2\u00c6\u00c7\7-\2\2\u00c7"+
-		"\u00d8\5\"\22\n\u00c8\u00c9\f\b\2\2\u00c9\u00ca\7.\2\2\u00ca\u00d8\5\""+
-		"\22\t\u00cb\u00cc\f\7\2\2\u00cc\u00cd\t\b\2\2\u00cd\u00d8\5\"\22\b\u00ce"+
-		"\u00cf\f\6\2\2\u00cf\u00d0\t\t\2\2\u00d0\u00d8\5\"\22\7\u00d1\u00d2\f"+
-		"\5\2\2\u00d2\u00d3\t\4\2\2\u00d3\u00d8\5\"\22\6\u00d4\u00d5\f\4\2\2\u00d5"+
-		"\u00d6\t\n\2\2\u00d6\u00d8\5\"\22\5\u00d7\u00bc\3\2\2\2\u00d7\u00bf\3"+
-		"\2\2\2\u00d7\u00c2\3\2\2\2\u00d7\u00c5\3\2\2\2\u00d7\u00c8\3\2\2\2\u00d7"+
-		"\u00cb\3\2\2\2\u00d7\u00ce\3\2\2\2\u00d7\u00d1\3\2\2\2\u00d7\u00d4\3\2"+
-		"\2\2\u00d8\u00db\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9\u00da\3\2\2\2\u00da"+
-		"#\3\2\2\2\u00db\u00d9\3\2\2\2\u00dc\u00e2\5&\24\2\u00dd\u00e2\5\26\f\2"+
-		"\u00de\u00e2\5*\26\2\u00df\u00e0\7:\2\2\u00e0\u00e2\5\"\22\2\u00e1\u00dc"+
-		"\3\2\2\2\u00e1\u00dd\3\2\2\2\u00e1\u00de\3\2\2\2\u00e1\u00df\3\2\2\2\u00e2"+
-		"%\3\2\2\2\u00e3\u00e4\7G\2\2\u00e4\u00e6\7:\2\2\u00e5\u00e7\5(\25\2\u00e6"+
-		"\u00e5\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8\u00e9\7;"+
+		"\34\36 \"$&(*,.\60\62\2\f\3\2\63\67\3\28<\3\2\34\35\4\2\34\35./\3\2\36"+
+		"\37\3\2 !\3\2%&\3\2\'*\3\2+-\5\2==BDHI\u0124\2\64\3\2\2\2\4A\3\2\2\2\6"+
+		"E\3\2\2\2\bO\3\2\2\2\n\\\3\2\2\2\f^\3\2\2\2\16i\3\2\2\2\20k\3\2\2\2\22"+
+		"|\3\2\2\2\24~\3\2\2\2\26\u0084\3\2\2\2\30\u008e\3\2\2\2\32\u0093\3\2\2"+
+		"\2\34\u009d\3\2\2\2\36\u00a3\3\2\2\2 \u00b0\3\2\2\2\"\u00b6\3\2\2\2$\u00e1"+
+		"\3\2\2\2&\u00e3\3\2\2\2(\u00ea\3\2\2\2*\u00f2\3\2\2\2,\u00f4\3\2\2\2."+
+		"\u0107\3\2\2\2\60\u010a\3\2\2\2\62\u0112\3\2\2\2\64\66\5\4\3\2\65\67\5"+
+		"\6\4\2\66\65\3\2\2\2\66\67\3\2\2\2\678\3\2\2\28<\5\20\t\29;\5,\27\2:9"+
+		"\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2><\3\2\2\2?@\7\2\2\3@"+
+		"\3\3\2\2\2AB\7\3\2\2BC\7G\2\2CD\7\4\2\2D\5\3\2\2\2EI\7\5\2\2FG\5\b\5\2"+
+		"GH\7\4\2\2HJ\3\2\2\2IF\3\2\2\2JK\3\2\2\2KI\3\2\2\2KL\3\2\2\2LM\3\2\2\2"+
+		"MN\7\6\2\2N\7\3\2\2\2OT\7G\2\2PQ\7\7\2\2QS\7G\2\2RP\3\2\2\2SV\3\2\2\2"+
+		"TR\3\2\2\2TU\3\2\2\2UW\3\2\2\2VT\3\2\2\2WZ\7\b\2\2X[\5\n\6\2Y[\5\f\7\2"+
+		"ZX\3\2\2\2ZY\3\2\2\2[\t\3\2\2\2\\]\t\2\2\2]\13\3\2\2\2^b\7\t\2\2_`\7\n"+
+		"\2\2`a\7=\2\2ac\7\13\2\2b_\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2ef\3\2"+
+		"\2\2fg\7\f\2\2gh\5\16\b\2h\r\3\2\2\2ij\t\3\2\2j\17\3\2\2\2ko\7\r\2\2l"+
+		"n\5\22\n\2ml\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2pr\3\2\2\2qo\3\2\2\2"+
+		"rs\7\16\2\2s\21\3\2\2\2t}\5\30\r\2uv\5&\24\2vw\7\4\2\2w}\3\2\2\2x}\5\24"+
+		"\13\2y}\5\32\16\2z}\5\34\17\2{}\5\36\20\2|t\3\2\2\2|u\3\2\2\2|x\3\2\2"+
+		"\2|y\3\2\2\2|z\3\2\2\2|{\3\2\2\2}\23\3\2\2\2~\u0080\7\17\2\2\177\u0081"+
+		"\5\"\22\2\u0080\177\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0082\3\2\2\2\u0082"+
+		"\u0083\7\4\2\2\u0083\25\3\2\2\2\u0084\u008b\7G\2\2\u0085\u0086\7\n\2\2"+
+		"\u0086\u0087\5\"\22\2\u0087\u0088\7\13\2\2\u0088\u008a\3\2\2\2\u0089\u0085"+
+		"\3\2\2\2\u008a\u008d\3\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
+		"\27\3\2\2\2\u008d\u008b\3\2\2\2\u008e\u008f\5\26\f\2\u008f\u0090\7\20"+
+		"\2\2\u0090\u0091\5\"\22\2\u0091\u0092\7\4\2\2\u0092\31\3\2\2\2\u0093\u0094"+
+		"\7\21\2\2\u0094\u0095\5\"\22\2\u0095\u0096\7\22\2\2\u0096\u0099\5\22\n"+
+		"\2\u0097\u0098\7\23\2\2\u0098\u009a\5\22\n\2\u0099\u0097\3\2\2\2\u0099"+
+		"\u009a\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009c\7\24\2\2\u009c\33\3\2\2"+
+		"\2\u009d\u009e\7\25\2\2\u009e\u009f\5\"\22\2\u009f\u00a0\7\26\2\2\u00a0"+
+		"\u00a1\5\22\n\2\u00a1\u00a2\7\27\2\2\u00a2\35\3\2\2\2\u00a3\u00a4\7\30"+
+		"\2\2\u00a4\u00a5\5\26\f\2\u00a5\u00a6\7\f\2\2\u00a6\u00a7\5\"\22\2\u00a7"+
+		"\u00a8\7\31\2\2\u00a8\u00aa\5\"\22\2\u00a9\u00ab\5 \21\2\u00aa\u00a9\3"+
+		"\2\2\2\u00aa\u00ab\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac\u00ad\7\26\2\2\u00ad"+
+		"\u00ae\5\22\n\2\u00ae\u00af\7\32\2\2\u00af\37\3\2\2\2\u00b0\u00b2\7\33"+
+		"\2\2\u00b1\u00b3\t\4\2\2\u00b2\u00b1\3\2\2\2\u00b2\u00b3\3\2\2\2\u00b3"+
+		"\u00b4\3\2\2\2\u00b4\u00b5\7=\2\2\u00b5!\3\2\2\2\u00b6\u00b8\b\22\1\2"+
+		"\u00b7\u00b9\t\5\2\2\u00b8\u00b7\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00ba"+
+		"\3\2\2\2\u00ba\u00bb\5$\23\2\u00bb\u00d9\3\2\2\2\u00bc\u00bd\f\f\2\2\u00bd"+
+		"\u00be\t\6\2\2\u00be\u00d8\5\"\22\r\u00bf\u00c0\f\13\2\2\u00c0\u00c1\t"+
+		"\7\2\2\u00c1\u00d8\5\"\22\f\u00c2\u00c3\f\n\2\2\u00c3\u00c4\7\"\2\2\u00c4"+
+		"\u00d8\5\"\22\13\u00c5\u00c6\f\t\2\2\u00c6\u00c7\7#\2\2\u00c7\u00d8\5"+
+		"\"\22\n\u00c8\u00c9\f\b\2\2\u00c9\u00ca\7$\2\2\u00ca\u00d8\5\"\22\t\u00cb"+
+		"\u00cc\f\7\2\2\u00cc\u00cd\t\b\2\2\u00cd\u00d8\5\"\22\b\u00ce\u00cf\f"+
+		"\6\2\2\u00cf\u00d0\t\t\2\2\u00d0\u00d8\5\"\22\7\u00d1\u00d2\f\5\2\2\u00d2"+
+		"\u00d3\t\4\2\2\u00d3\u00d8\5\"\22\6\u00d4\u00d5\f\4\2\2\u00d5\u00d6\t"+
+		"\n\2\2\u00d6\u00d8\5\"\22\5\u00d7\u00bc\3\2\2\2\u00d7\u00bf\3\2\2\2\u00d7"+
+		"\u00c2\3\2\2\2\u00d7\u00c5\3\2\2\2\u00d7\u00c8\3\2\2\2\u00d7\u00cb\3\2"+
+		"\2\2\u00d7\u00ce\3\2\2\2\u00d7\u00d1\3\2\2\2\u00d7\u00d4\3\2\2\2\u00d8"+
+		"\u00db\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9\u00da\3\2\2\2\u00da#\3\2\2\2"+
+		"\u00db\u00d9\3\2\2\2\u00dc\u00e2\5&\24\2\u00dd\u00e2\5\26\f\2\u00de\u00e2"+
+		"\5*\26\2\u00df\u00e0\7\60\2\2\u00e0\u00e2\5\"\22\2\u00e1\u00dc\3\2\2\2"+
+		"\u00e1\u00dd\3\2\2\2\u00e1\u00de\3\2\2\2\u00e1\u00df\3\2\2\2\u00e2%\3"+
+		"\2\2\2\u00e3\u00e4\7G\2\2\u00e4\u00e6\7\60\2\2\u00e5\u00e7\5(\25\2\u00e6"+
+		"\u00e5\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8\u00e9\7\61"+
 		"\2\2\u00e9\'\3\2\2\2\u00ea\u00ef\5\"\22\2\u00eb\u00ec\7\7\2\2\u00ec\u00ee"+
 		"\5\"\22\2\u00ed\u00eb\3\2\2\2\u00ee\u00f1\3\2\2\2\u00ef\u00ed\3\2\2\2"+
 		"\u00ef\u00f0\3\2\2\2\u00f0)\3\2\2\2\u00f1\u00ef\3\2\2\2\u00f2\u00f3\t"+
-		"\13\2\2\u00f3+\3\2\2\2\u00f4\u00f5\7<\2\2\u00f5\u00f6\7G\2\2\u00f6\u00f8"+
-		"\7:\2\2\u00f7\u00f9\5\60\31\2\u00f8\u00f7\3\2\2\2\u00f8\u00f9\3\2\2\2"+
-		"\u00f9\u00fa\3\2\2\2\u00fa\u00fd\7;\2\2\u00fb\u00fc\7\b\2\2\u00fc\u00fe"+
-		"\5\n\6\2\u00fd\u00fb\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe\u00ff\3\2\2\2\u00ff"+
-		"\u0100\5.\30\2\u0100\u0101\5\20\t\2\u0101-\3\2\2\2\u0102\u0103\5\b\5\2"+
-		"\u0103\u0104\7\4\2\2\u0104\u0106\3\2\2\2\u0105\u0102\3\2\2\2\u0106\u0109"+
-		"\3\2\2\2\u0107\u0105\3\2\2\2\u0107\u0108\3\2\2\2\u0108/\3\2\2\2\u0109"+
-		"\u0107\3\2\2\2\u010a\u010f\5\62\32\2\u010b\u010c\7\7\2\2\u010c\u010e\5"+
-		"\62\32\2\u010d\u010b\3\2\2\2\u010e\u0111\3\2\2\2\u010f\u010d\3\2\2\2\u010f"+
-		"\u0110\3\2\2\2\u0110\61\3\2\2\2\u0111\u010f\3\2\2\2\u0112\u0113\7G\2\2"+
-		"\u0113\u0116\7\b\2\2\u0114\u0117\5\n\6\2\u0115\u0117\5\f\7\2\u0116\u0114"+
-		"\3\2\2\2\u0116\u0115\3\2\2\2\u0117\63\3\2\2\2\32\66<KTZdo|\u0080\u008b"+
-		"\u0099\u00aa\u00b2\u00b8\u00d7\u00d9\u00e1\u00e6\u00ef\u00f8\u00fd\u0107"+
-		"\u010f\u0116";
+		"\13\2\2\u00f3+\3\2\2\2\u00f4\u00f5\7\62\2\2\u00f5\u00f6\7G\2\2\u00f6\u00f8"+
+		"\7\60\2\2\u00f7\u00f9\5\60\31\2\u00f8\u00f7\3\2\2\2\u00f8\u00f9\3\2\2"+
+		"\2\u00f9\u00fa\3\2\2\2\u00fa\u00fd\7\61\2\2\u00fb\u00fc\7\b\2\2\u00fc"+
+		"\u00fe\5\n\6\2\u00fd\u00fb\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe\u00ff\3\2"+
+		"\2\2\u00ff\u0100\5.\30\2\u0100\u0101\5\20\t\2\u0101-\3\2\2\2\u0102\u0103"+
+		"\5\b\5\2\u0103\u0104\7\4\2\2\u0104\u0106\3\2\2\2\u0105\u0102\3\2\2\2\u0106"+
+		"\u0109\3\2\2\2\u0107\u0105\3\2\2\2\u0107\u0108\3\2\2\2\u0108/\3\2\2\2"+
+		"\u0109\u0107\3\2\2\2\u010a\u010f\5\62\32\2\u010b\u010c\7\7\2\2\u010c\u010e"+
+		"\5\62\32\2\u010d\u010b\3\2\2\2\u010e\u0111\3\2\2\2\u010f\u010d\3\2\2\2"+
+		"\u010f\u0110\3\2\2\2\u0110\61\3\2\2\2\u0111\u010f\3\2\2\2\u0112\u0113"+
+		"\7G\2\2\u0113\u0116\7\b\2\2\u0114\u0117\5\n\6\2\u0115\u0117\5\f\7\2\u0116"+
+		"\u0114\3\2\2\2\u0116\u0115\3\2\2\2\u0117\63\3\2\2\2\32\66<KTZdo|\u0080"+
+		"\u008b\u0099\u00aa\u00b2\u00b8\u00d7\u00d9\u00e1\u00e6\u00ef\u00f8\u00fd"+
+		"\u0107\u010f\u0116";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
