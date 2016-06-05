@@ -1,6 +1,9 @@
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.*;
+
+import java.io.*;
+
 import java.util.ArrayList;
 
 public class TranslateListener extends GrammarPortugolBaseListener {
@@ -81,7 +84,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override public void enterStm_se(GrammarPortugolParser.Stm_seContext ctx) {
         System.out.print("\t\t");
         System.out.print("if(");
-        System.out.print(ctx.expr().getText());
+        System.out.print(this.convertExprConditional(ctx.expr().getText()));
         System.out.println("){");
     }
 
@@ -114,11 +117,23 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     }
 
     private String convertExprConditional(String expr){
-        String exprReturn = "";
+//    	String[] strPortugol = new String[]{"=", " e ", " ou ", " não "};
+//    	String[] strJava =  new String[]{, " && ", " || ", " ! "};
+    	   	
+    	
+    	expr = expr.replaceAll("=", "==");
+    	expr = expr.replaceAll("e", " && ");
+    	expr = expr.replaceAll("ou", " || ");
+    	expr = expr.replaceAll("não", " ! ");
+    	expr = expr.replaceAll("<>", " != ");
+    	
+    	return expr;
+//    	StringUtils.replaceEach(expr, strPortugol, strJava);
+//        String exprReturn = "";
         // De = para ==
         // De e para &&
         // De ou para ||
         // De não para !
-        return exprReturn;
+//        return expr;
     }
 }

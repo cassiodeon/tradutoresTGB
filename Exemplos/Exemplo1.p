@@ -8,7 +8,7 @@ variáveis
 fim-variáveis
 
 início
-	se x = 2 então
+	se (x = 2 e x = 10) então
 		z := 'A';
 		imprima("nao eh dois");
 	senão
