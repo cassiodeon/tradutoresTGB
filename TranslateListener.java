@@ -78,6 +78,18 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         System.out.println("public static void main(String[] args){");
     }
 
+    @Override public void enterStm_se(GrammarPortugolParser.Stm_seContext ctx) {
+        System.out.print("\t\t");
+        System.out.print("if(");
+        System.out.print(ctx.expr().getText());
+        System.out.println("){");
+    }
+
+    @Override public void exitStm_se(GrammarPortugolParser.Stm_seContext ctx) {
+        System.out.print("\t\t");
+        System.out.println("}");
+    }
+
     @Override
     public void exitStm_block(GrammarPortugolParser.Stm_blockContext ctx) {
         System.out.print("\t");
@@ -99,5 +111,14 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         }
 
         return type;
+    }
+
+    private String convertExprConditional(String expr){
+        String exprReturn = "";
+        // De = para ==
+        // De e para &&
+        // De ou para ||
+        // De não para !
+        return exprReturn;
     }
 }

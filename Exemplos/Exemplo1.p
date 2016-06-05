@@ -8,4 +8,11 @@ variáveis
 fim-variáveis
 
 início
+	se x = 2 então
+		z := 'A';
+		imprima("nao eh dois");
+	senão
+		z := 'B';
+		imprima("nao eh dois");
+	fim-se
 fim

@@ -87,15 +87,25 @@ public interface GrammarPortugolListener extends ParseTreeListener {
 	 */
 	void exitStm_block(GrammarPortugolParser.Stm_blockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarPortugolParser#stm_list}.
+	 * Enter a parse tree produced by {@link GrammarPortugolParser#statementList}.
 	 * @param ctx the parse tree
 	 */
-	void enterStm_list(GrammarPortugolParser.Stm_listContext ctx);
+	void enterStatementList(GrammarPortugolParser.StatementListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarPortugolParser#stm_list}.
+	 * Exit a parse tree produced by {@link GrammarPortugolParser#statementList}.
 	 * @param ctx the parse tree
 	 */
-	void exitStm_list(GrammarPortugolParser.Stm_listContext ctx);
+	void exitStatementList(GrammarPortugolParser.StatementListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarPortugolParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(GrammarPortugolParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarPortugolParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(GrammarPortugolParser.StatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarPortugolParser#stm_ret}.
 	 * @param ctx the parse tree

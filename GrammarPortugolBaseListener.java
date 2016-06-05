@@ -111,13 +111,25 @@ public class GrammarPortugolBaseListener implements GrammarPortugolListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStm_list(GrammarPortugolParser.Stm_listContext ctx) { }
+	@Override public void enterStatementList(GrammarPortugolParser.StatementListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStm_list(GrammarPortugolParser.Stm_listContext ctx) { }
+	@Override public void exitStatementList(GrammarPortugolParser.StatementListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatement(GrammarPortugolParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement(GrammarPortugolParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

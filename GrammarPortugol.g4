@@ -31,9 +31,12 @@ tp_prim_pl
 	| 'lógicos'
 	;
 stm_block
-	: 'início' (stm_list)* 'fim'
+	: 'início' statementList 'fim'
 	;
-stm_list
+statementList
+	: (statement)*
+	;
+statement
 	: stm_attr
 	| fcall ';'
 	| stm_ret
@@ -51,13 +54,13 @@ stm_attr
 	: lvalue ':=' expr ';'
 	;
 stm_se
-	: 'se' expr 'então' stm_list ('senão' stm_list)? 'fim-se'
+	: 'se' expr 'então' statementList ('senão' statementList)? 'fim-se'
 	;
 stm_enquanto
-	: 'enquanto' expr 'faça' stm_list 'fim-enquanto'
+	: 'enquanto' expr 'faça' statementList 'fim-enquanto'
 	;
 stm_para
-	: 'para' lvalue 'de' expr 'até' expr passo? 'faça' stm_list 'fim-para'
+	: 'para' lvalue 'de' expr 'até' expr passo? 'faça' statementList 'fim-para'
 	;
 passo
 	: 'passo' ('+'|'-')? T_INT_LIT
@@ -159,10 +162,10 @@ T_CARAC_LIT
 */
 
 T_CARAC_LIT
-	: '\'' ( . )? '\''
+	: '\'' (.)? '\''
 	;
 T_STRING_LIT
-	: '"' (.)* '"'
+	: '"' ( ESC_SEQ | ~('\\'|'"') )* '"'
 	;
 
 /*
@@ -179,6 +182,21 @@ ML_COMMENT
 /*
 	Regra para identificar nomes de variáveis, funções, etc.
 */
+ESC_SEQ
+    :   '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')
+    |   UNICODE_ESC
+    |   OCTAL_ESC
+    ;
+
+OCTAL_ESC
+    :   '\\' ('0'..'3') ('0'..'7') ('0'..'7')
+    |   '\\' ('0'..'7') ('0'..'7')
+    |   '\\' ('0'..'7')
+    ;
+
+UNICODE_ESC
+    :   '\\' 'u' T_HEX_LIT T_HEX_LIT T_HEX_LIT T_HEX_LIT
+    ;
 
 T_IDENTIFICADOR
 	: [a-zA-Z_] [a-zA-Z0-9_]*
