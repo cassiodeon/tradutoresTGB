@@ -54,7 +54,10 @@ stm_attr
 	: lvalue ':=' expr ';'
 	;
 stm_se
-	: 'se' expr 'então' statementList ('senão' statementList)? 'fim-se'
+	: 'se' expr 'então' statementList (stm_senao)? 'fim-se'
+	;
+stm_senao
+	: 'senão' statementList
 	;
 stm_enquanto
 	: 'enquanto' expr 'faça' statementList 'fim-enquanto'
@@ -66,17 +69,22 @@ passo
 	: 'passo' ('+'|'-')? T_INT_LIT
 	;
 expr
-	: expr ('ou'|'||') expr
-	| expr ('e'|'&&') expr
-	| expr '|' expr
-	| expr '^' expr
-	| expr '&' expr
-	| expr ('='|'<>') expr
-	| expr ('>'|'>='|'<'|'<=') expr
-	| expr ('+' | '-') expr
-	| expr ('/'|'*'|'%') expr
+	: expr operator expr
 	| ('+'|'-'|'~'|'não')? termo
 	;
+
+operator
+	: ('ou'|'||')
+	| ('e'|'&&')
+	| '|'
+	| '^'
+	| '&'
+	| ('='|'<>')
+	| ('>'|'>='|'<'|'<=')
+	| ('+' | '-')
+	| ('/'|'*'|'%')
+	;
+
 termo
 	: fcall
 	| lvalue

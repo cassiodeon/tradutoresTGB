@@ -147,6 +147,16 @@ public interface GrammarPortugolListener extends ParseTreeListener {
 	 */
 	void exitStm_se(GrammarPortugolParser.Stm_seContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarPortugolParser#stm_senao}.
+	 * @param ctx the parse tree
+	 */
+	void enterStm_senao(GrammarPortugolParser.Stm_senaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarPortugolParser#stm_senao}.
+	 * @param ctx the parse tree
+	 */
+	void exitStm_senao(GrammarPortugolParser.Stm_senaoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarPortugolParser#stm_enquanto}.
 	 * @param ctx the parse tree
 	 */
@@ -186,6 +196,16 @@ public interface GrammarPortugolListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpr(GrammarPortugolParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarPortugolParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperator(GrammarPortugolParser.OperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarPortugolParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperator(GrammarPortugolParser.OperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarPortugolParser#termo}.
 	 * @param ctx the parse tree

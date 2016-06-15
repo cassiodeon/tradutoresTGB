@@ -183,6 +183,18 @@ public class GrammarPortugolBaseListener implements GrammarPortugolListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStm_senao(GrammarPortugolParser.Stm_senaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStm_senao(GrammarPortugolParser.Stm_senaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStm_enquanto(GrammarPortugolParser.Stm_enquantoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -226,6 +238,18 @@ public class GrammarPortugolBaseListener implements GrammarPortugolListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpr(GrammarPortugolParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOperator(GrammarPortugolParser.OperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOperator(GrammarPortugolParser.OperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
