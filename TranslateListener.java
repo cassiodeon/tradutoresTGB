@@ -12,6 +12,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     ArrayList<String> listAttributes;
     String finalLine = ";";
     int nivelAninhamento = 0;
+    SymbolTable symbolTable;
 
     public TranslateListener(GrammarPortugolParser parser) {this.parser = parser;}
 
@@ -19,6 +20,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override
     public void enterDeclaracao_algoritmo(GrammarPortugolParser.Declaracao_algoritmoContext ctx) {
         System.out.println("public class " + ctx.T_IDENTIFICADOR() + " {");
+        symbolTable = new SymbolTable(null);
         nivelAninhamento++;
     }
 
@@ -46,6 +48,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
                 //Obtem o tipo correspondente em Java
                 int typeToken = ctx.tp_primitivo().getStart().getType();
                 typeData = getTypeData(typeToken);
+                symbolTable.put(identifier,typeToken);
 
                 this.printTabs();
                 //Monta a delcaração correspondente em Java
@@ -73,6 +76,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
 
                 //Monta a delcaração correspondente em Java
                 this.printTabs();
+                symbolTable.put(identifier,typeToken);
                 System.out.println(typeData + " "+ identifier + declMatrix + " = new "+ typeData + declMatrixSize + finalLine);
             }
 
@@ -133,9 +137,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     }
     /** FIM ENQUANTO **/
 
-    /** CONVERTE ESTRUTURA REPETICAO "PARA" **/
-
-    /** FIM PARA **/
+    /** CONVERTE ESTRUTURA REPETICAO "PARA" **/    
     @Override
     public void enterStm_para(GrammarPortugolParser.Stm_paraContext ctx) {
         String delcaracaoFor = "";
@@ -177,14 +179,23 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         this.printTabs();
         System.out.println("}");
     }
+    /** FIM PARA **/
     /**fim estruções de controle */
 
+    //CONVERTE ATRIBUIÇÃO
     @Override
     public void enterStm_attr(GrammarPortugolParser.Stm_attrContext ctx) {
         String identificador = ctx.lvalue().getText();
-        String expressao = convertExprConditional(ctx.expr());
-        this.printTabs();
-        System.out.println(identificador +" = "+ expressao + finalLine);
+        convertExprAssignment(ctx.expr(),identificador);        
+    }
+
+    //CONVERTE CHAMADA DE FUNÇÃO
+    @Override
+    public void enterFcall(GrammarPortugolParser.FcallContext ctx) {
+        if(ctx.T_IDENTIFICADOR().getText().equals("imprima")){
+            this.printTabs();
+            System.out.println("System.out.println("+ctx.fargs().getText()+")");
+        }
     }
 
     @Override
@@ -194,6 +205,22 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         System.out.println("}");
     }
 
+    //Função para converter atribuição, tratamento especial para caso do leia
+    private void convertExprAssignment(GrammarPortugolParser.ExprContext ctxExpr,  String identificador){
+        if(ctxExpr.termo() != null){
+            if(ctxExpr.termo().fcall() != null){
+                if(ctxExpr.termo().fcall().T_IDENTIFICADOR().getText().equals("leia")){
+                    convertLeia(ctxExpr.termo().fcall(), identificador);
+                    return;
+                }
+            }
+        }
+        String expressao = convertExprConditional(ctxExpr);
+        this.printTabs();
+        System.out.println(identificador +" = "+ expressao + finalLine);
+    }
+
+    //Função que converte expressão condicional
     private String convertExprConditional(GrammarPortugolParser.ExprContext ctxExpr){
         String operator = "";
         if(ctxExpr.termo() != null){
@@ -214,6 +241,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         return "";
     }
 
+    //Converte o tipo de dado
     private String getTypeData(int typeToken){
         String type = "";
         if(typeToken == parser.INTEIRO || typeToken == parser.INTEIROS){
@@ -231,6 +259,32 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         return type;
     }
 
+    //Converte a função leia para Java
+    private void convertLeia(GrammarPortugolParser.FcallContext ctxFcall, String identificador){
+        String delcaracaoScanner = "Scanner ler = new Scanner(System.in);";
+        String leitura = "";
+        
+        int type = symbolTable.get(identificador);
+        if(type == parser.INTEIRO || type == parser.INTEIROS){
+            leitura = "ler.nextInt();";
+        }else if(type == parser.REAL || type == parser.REAIS){
+            leitura = "ler.nextFloat();";
+        }else if(type == parser.CARACTERE || type == parser.CARACTERES){
+            leitura = "ler.next();";
+        }else if(type == parser.LITERAL || type == parser.LITERAIS){
+            leitura = "ler.next();";
+        }else if(type == parser.LOGICO || type == parser.LOGICOS){
+            leitura = "ler.nextBoolean();";
+        }
+
+
+        this.printTabs();
+        System.out.println(delcaracaoScanner);
+        this.printTabs();
+        System.out.println(identificador +" = "+leitura);
+    }
+
+    //Converte os operadores
     private String convertOperator(String op){
         String operator = op;
         switch (op)

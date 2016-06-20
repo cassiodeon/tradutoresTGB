@@ -1,7 +1,8 @@
 algoritmo teste_variaveis;
 
 variáveis
-	x, y	: inteiro;
+	x, y, res: inteiro;
+    f       : real;
     z       : caractere;
     b       : lógico;
     mq      : matriz[5][4] de inteiros;
@@ -15,10 +16,11 @@ início
     		imprima("nao eh dois");
     	senão
     		z := 'B';
+            z := 'C';
     		imprima("nao eh dois");
     	fim-se
     fim-se
-
+    f := leia();
     enquanto x <> 0 faça
         imprima(x);
         x := x - 1;

@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.*;
 
 public class TranslatePortugol_Java {
     public static void main(String[] args) throws Exception {
