@@ -12,6 +12,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     ArrayList<String> listAttributes;
     String finalLine = ";";
     int nivelAninhamento = 0;
+    int countLeia = 0;
     SymbolTable symbolTable;
 
     public TranslateListener(GrammarPortugolParser parser) {this.parser = parser;}
@@ -19,6 +20,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     /** Listen to matches of enterDeclaracao_algoritmo and exitDeclaracao_algoritmo */
     @Override
     public void enterDeclaracao_algoritmo(GrammarPortugolParser.Declaracao_algoritmoContext ctx) {
+        System.out.println("import java.util.*;\n");
         System.out.println("public class " + ctx.T_IDENTIFICADOR() + " {");
         symbolTable = new SymbolTable(null);
         nivelAninhamento++;
@@ -38,6 +40,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
 
     @Override
     public void enterVar_decl(GrammarPortugolParser.Var_declContext ctx) {
+        String modifierProp = "public static ";
         //Percorre cada variável declarada
         for (TerminalNode terminal : ctx.T_IDENTIFICADOR()) {
             String identifier = terminal.toString();
@@ -52,7 +55,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
 
                 this.printTabs();
                 //Monta a delcaração correspondente em Java
-                System.out.println(typeData +" "+ identifier + finalLine);
+                System.out.println(modifierProp + typeData +" "+ identifier + finalLine);
 
             //Verifica se foi do tipo matriz
             }else if(ctx.tp_matriz() != null){
@@ -77,9 +80,8 @@ public class TranslateListener extends GrammarPortugolBaseListener {
                 //Monta a delcaração correspondente em Java
                 this.printTabs();
                 symbolTable.put(identifier,typeToken);
-                System.out.println(typeData + " "+ identifier + declMatrix + " = new "+ typeData + declMatrixSize + finalLine);
+                System.out.println(modifierProp + typeData + " "+ identifier + declMatrix + " = new "+ typeData + declMatrixSize + finalLine);
             }
-
         }
     }
 
@@ -87,6 +89,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     /** Aqui será transformado no método main de classe **/
     @Override
     public void enterStm_block(GrammarPortugolParser.Stm_blockContext ctx) {
+        System.out.print("\n");
         this.printTabs();
         System.out.println("public static void main(String[] args){");
         nivelAninhamento++;
@@ -97,9 +100,11 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override
     public void enterStm_se(GrammarPortugolParser.Stm_seContext ctx) {
         this.printTabs();
+
         System.out.print("if(");
         System.out.print(this.convertExprConditional(ctx.expr()));
         System.out.println("){");
+
         nivelAninhamento++;
     }
 
@@ -108,6 +113,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         nivelAninhamento--;
         this.printTabs();
         System.out.println("}");
+        System.out.print("\n");
     }
 
     @Override
@@ -123,6 +129,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override
     public void enterStm_enquanto(GrammarPortugolParser.Stm_enquantoContext ctx) {
         this.printTabs();
+
         System.out.print("while(");
         System.out.print(this.convertExprConditional(ctx.expr()));
         System.out.println("){");
@@ -134,10 +141,11 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         nivelAninhamento--;
         this.printTabs();
         System.out.println("}");
+        System.out.print("\n");
     }
     /** FIM ENQUANTO **/
 
-    /** CONVERTE ESTRUTURA REPETICAO "PARA" **/    
+    /** CONVERTE ESTRUTURA REPETICAO "PARA" **/
     @Override
     public void enterStm_para(GrammarPortugolParser.Stm_paraContext ctx) {
         String delcaracaoFor = "";
@@ -148,6 +156,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         String fatorDeMudanca = "";
 
         this.printTabs();
+
         System.out.print("for(");
         if(ctx.expr().size() == 2){
             variavelControleFor = ctx.lvalue().getText();
@@ -178,6 +187,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         nivelAninhamento--;
         this.printTabs();
         System.out.println("}");
+        System.out.print("\n");
     }
     /** FIM PARA **/
     /**fim estruções de controle */
@@ -186,7 +196,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override
     public void enterStm_attr(GrammarPortugolParser.Stm_attrContext ctx) {
         String identificador = ctx.lvalue().getText();
-        convertExprAssignment(ctx.expr(),identificador);        
+        convertExprAssignment(ctx.expr(),identificador);
     }
 
     //CONVERTE CHAMADA DE FUNÇÃO
@@ -194,7 +204,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     public void enterFcall(GrammarPortugolParser.FcallContext ctx) {
         if(ctx.T_IDENTIFICADOR().getText().equals("imprima")){
             this.printTabs();
-            System.out.println("System.out.println("+ctx.fargs().getText()+")");
+            System.out.println("System.out.println("+ctx.fargs().getText()+")" + finalLine);
         }
     }
 
@@ -261,20 +271,22 @@ public class TranslateListener extends GrammarPortugolBaseListener {
 
     //Converte a função leia para Java
     private void convertLeia(GrammarPortugolParser.FcallContext ctxFcall, String identificador){
-        String delcaracaoScanner = "Scanner ler = new Scanner(System.in);";
+        countLeia++;
+        String nomeVariavelLeitura = "ler_"+ countLeia;
+        String delcaracaoScanner = "Scanner "+nomeVariavelLeitura+" = new Scanner(System.in);";
         String leitura = "";
-        
+
         int type = symbolTable.get(identificador);
         if(type == parser.INTEIRO || type == parser.INTEIROS){
-            leitura = "ler.nextInt();";
+            leitura = nomeVariavelLeitura+".nextInt();";
         }else if(type == parser.REAL || type == parser.REAIS){
-            leitura = "ler.nextFloat();";
+            leitura = nomeVariavelLeitura+".nextFloat();";
         }else if(type == parser.CARACTERE || type == parser.CARACTERES){
-            leitura = "ler.next();";
+            leitura = nomeVariavelLeitura+".next();";
         }else if(type == parser.LITERAL || type == parser.LITERAIS){
-            leitura = "ler.next();";
+            leitura = nomeVariavelLeitura+".next();";
         }else if(type == parser.LOGICO || type == parser.LOGICOS){
-            leitura = "ler.nextBoolean();";
+            leitura = nomeVariavelLeitura+".nextBoolean();";
         }
 
 

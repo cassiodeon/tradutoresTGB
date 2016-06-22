@@ -21,11 +21,12 @@ início
     	fim-se
     fim-se
     f := leia();
+    x := leia();
     enquanto x <> 0 faça
         imprima(x);
         x := x - 1;
     fim-enquanto
-
+    x := leia();
     para x de 1 até 10 faça
         res := res * x;
     fim-para
