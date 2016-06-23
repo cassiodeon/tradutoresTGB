@@ -10,6 +10,10 @@ variáveis
 fim-variáveis
 
 início
+    b := falso;
+    se b = verdadeiro então
+        imprima("Era verdadeiro");
+    fim-se
 	se x = 2 e y >= 10 ou não b então
 		se x < 2 então
             z := 'A';

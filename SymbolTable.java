@@ -23,4 +23,8 @@ public class SymbolTable{
 
 		return null;
 	}
+
+	public SymbolTable getPrev(){
+		return this.prev;
+	}
 }

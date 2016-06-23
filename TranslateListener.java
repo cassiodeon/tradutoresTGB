@@ -40,7 +40,11 @@ public class TranslateListener extends GrammarPortugolBaseListener {
 
     @Override
     public void enterVar_decl(GrammarPortugolParser.Var_declContext ctx) {
-        String modifierProp = "public static ";
+        String modifierProp = "";
+        if (ctx.parent.getRuleIndex() == parser.RULE_var_decl_block) {
+            modifierProp = "public static ";    
+        }
+        
         //Percorre cada variável declarada
         for (TerminalNode terminal : ctx.T_IDENTIFICADOR()) {
             String identifier = terminal.toString();
@@ -89,10 +93,12 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     /** Aqui será transformado no método main de classe **/
     @Override
     public void enterStm_block(GrammarPortugolParser.Stm_blockContext ctx) {
-        System.out.print("\n");
-        this.printTabs();
-        System.out.println("public static void main(String[] args){");
-        nivelAninhamento++;
+        if(ctx.parent.getRuleIndex() == parser.RULE_algoritmo){
+            System.out.print("\n");
+            this.printTabs();
+            System.out.println("public static void main(String[] args){");
+            nivelAninhamento++;
+        }
     }
 
     /**Converte estrutras de controle**/
@@ -203,9 +209,32 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     @Override
     public void enterFcall(GrammarPortugolParser.FcallContext ctx) {
         if(ctx.T_IDENTIFICADOR().getText().equals("imprima")){
+            String paramentroPrintln = "";
+            String concatenacao = "";
+            if(ctx.fargs() != null){
+                for (GrammarPortugolParser.ExprContext expr : ctx.fargs().expr()) {
+                    paramentroPrintln += concatenacao + convertExprConditional(expr);
+                    concatenacao = " + ";
+                }
+            }
             this.printTabs();
-            System.out.println("System.out.println("+ctx.fargs().getText()+")" + finalLine);
+            System.out.println("System.out.println("+paramentroPrintln+")" + finalLine);
+            return;
+        }else if(ctx.T_IDENTIFICADOR().getText().equals("leia")){
+            return;
         }
+        this.printTabs();
+        System.out.println(ctx.getText()+finalLine);
+    }
+
+    @Override
+    public void enterStm_ret(GrammarPortugolParser.Stm_retContext ctx) {
+        String valorRetorno = "";
+        if(ctx.expr() != null){
+            valorRetorno = " "+convertExprConditional(ctx.expr());
+        }
+        this.printTabs();
+        System.out.println("return"+valorRetorno+";");
     }
 
     @Override
@@ -214,7 +243,74 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         this.printTabs();
         System.out.println("}");
     }
+    
+    @Override 
+    public void enterFunc_decls(GrammarPortugolParser.Func_declsContext ctx) {
+        SymbolTable symbolTableSave = symbolTable;
+        symbolTable = new SymbolTable(symbolTableSave);
 
+        String nomeMetodo = ctx.T_IDENTIFICADOR().getText();
+        String parametros = "";
+        if(ctx.fparams() != null){
+            parametros = convertFparams(ctx.fparams());
+        }
+        int typeToken = ctx.tp_primitivo().getStart().getType();
+        String tipoDoRetorno = getTypeData(typeToken);
+
+        System.out.print("\n");
+        this.printTabs();
+        System.out.println("public static "+ tipoDoRetorno +" "+nomeMetodo+ "("+parametros+"){");
+        nivelAninhamento++; 
+    }
+    
+    @Override
+    public void exitFunc_decls(GrammarPortugolParser.Func_declsContext ctx) {
+        symbolTable = symbolTable.getPrev();
+    }
+
+    private String convertFparams(GrammarPortugolParser.FparamsContext ctx) {
+        String parametros = "";
+        String separador = "";
+        for (GrammarPortugolParser.FparamContext param : ctx.fparam()) {
+            String identificador = param.T_IDENTIFICADOR().getText();
+            String typeData = "";
+            
+            //Verifica se foi de um tipo primitivo
+            if(param.tp_primitivo() != null){
+                //Obtem o tipo correspondente em Java
+                int typeToken = param.tp_primitivo().getStart().getType();
+                typeData = getTypeData(typeToken);
+                symbolTable.put(identificador,typeToken);
+
+            //Verifica se foi do tipo matriz
+            }else if(param.tp_matriz() != null){
+                //Obtem os tamanhos declarados para a matriz|array
+                ArrayList<String> size = new ArrayList<String>();
+                for (TerminalNode sizeMatriz : param.tp_matriz().T_INT_LIT()) {
+                    size.add(sizeMatriz.getText());
+                }
+
+                //Monta o paramentro do tipo matriz|array
+                String declMatrix = "";
+                for(int i = 0; i < size.size(); i++){
+                    declMatrix += "[]";
+                }
+
+                //Obtem o tipo correspondente em Java
+                int typeToken = param.tp_matriz().tp_prim_pl().getStart().getType();
+                typeData = getTypeData(typeToken);
+                typeData = typeData + declMatrix;
+                symbolTable.put(identificador,typeToken);
+            }
+            
+            //Monta o paramentro correspondente em Java            
+            parametros += separador + typeData +" "+ identificador;
+            separador = ", ";
+        }
+
+        return parametros;
+    }
+    
     //Função para converter atribuição, tratamento especial para caso do leia
     private void convertExprAssignment(GrammarPortugolParser.ExprContext ctxExpr,  String identificador){
         if(ctxExpr.termo() != null){
@@ -234,6 +330,11 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     private String convertExprConditional(GrammarPortugolParser.ExprContext ctxExpr){
         String operator = "";
         if(ctxExpr.termo() != null){
+            if(ctxExpr.termo().getText().equals("verdadeiro")){
+                return "true";
+            }else if(ctxExpr.termo().getText().equals("falso")){
+                return "false";
+            }
             return ctxExpr.termo().getText();
         }
 
@@ -282,7 +383,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         }else if(type == parser.REAL || type == parser.REAIS){
             leitura = nomeVariavelLeitura+".nextFloat();";
         }else if(type == parser.CARACTERE || type == parser.CARACTERES){
-            leitura = nomeVariavelLeitura+".next();";
+            leitura = nomeVariavelLeitura+".next().charAt(0);";
         }else if(type == parser.LITERAL || type == parser.LITERAIS){
             leitura = nomeVariavelLeitura+".next();";
         }else if(type == parser.LOGICO || type == parser.LOGICOS){
