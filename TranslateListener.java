@@ -42,9 +42,9 @@ public class TranslateListener extends GrammarPortugolBaseListener {
     public void enterVar_decl(GrammarPortugolParser.Var_declContext ctx) {
         String modifierProp = "";
         if (ctx.parent.getRuleIndex() == parser.RULE_var_decl_block) {
-            modifierProp = "public static ";    
+            modifierProp = "public static ";
         }
-        
+
         //Percorre cada variável declarada
         for (TerminalNode terminal : ctx.T_IDENTIFICADOR()) {
             String identifier = terminal.toString();
@@ -223,8 +223,10 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         }else if(ctx.T_IDENTIFICADOR().getText().equals("leia")){
             return;
         }
-        this.printTabs();
-        System.out.println(ctx.getText()+finalLine);
+        if(ctx.parent.getRuleIndex() == parser.RULE_statement){
+            this.printTabs();
+            System.out.println(ctx.getText()+finalLine);
+        }
     }
 
     @Override
@@ -243,8 +245,8 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         this.printTabs();
         System.out.println("}");
     }
-    
-    @Override 
+
+    @Override
     public void enterFunc_decls(GrammarPortugolParser.Func_declsContext ctx) {
         SymbolTable symbolTableSave = symbolTable;
         symbolTable = new SymbolTable(symbolTableSave);
@@ -260,9 +262,9 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         System.out.print("\n");
         this.printTabs();
         System.out.println("public static "+ tipoDoRetorno +" "+nomeMetodo+ "("+parametros+"){");
-        nivelAninhamento++; 
+        nivelAninhamento++;
     }
-    
+
     @Override
     public void exitFunc_decls(GrammarPortugolParser.Func_declsContext ctx) {
         symbolTable = symbolTable.getPrev();
@@ -274,7 +276,7 @@ public class TranslateListener extends GrammarPortugolBaseListener {
         for (GrammarPortugolParser.FparamContext param : ctx.fparam()) {
             String identificador = param.T_IDENTIFICADOR().getText();
             String typeData = "";
-            
+
             //Verifica se foi de um tipo primitivo
             if(param.tp_primitivo() != null){
                 //Obtem o tipo correspondente em Java
@@ -302,15 +304,15 @@ public class TranslateListener extends GrammarPortugolBaseListener {
                 typeData = typeData + declMatrix;
                 symbolTable.put(identificador,typeToken);
             }
-            
-            //Monta o paramentro correspondente em Java            
+
+            //Monta o paramentro correspondente em Java
             parametros += separador + typeData +" "+ identificador;
             separador = ", ";
         }
 
         return parametros;
     }
-    
+
     //Função para converter atribuição, tratamento especial para caso do leia
     private void convertExprAssignment(GrammarPortugolParser.ExprContext ctxExpr,  String identificador){
         if(ctxExpr.termo() != null){
